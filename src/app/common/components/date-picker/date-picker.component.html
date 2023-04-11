@@ -1,0 +1,20 @@
+<div [formGroup]="parentForm">
+  <label [for]="reqObj['formControl']" class="form-label">{{reqObj['label']}}
+    &nbsp;<span class="text-danger">{{reqObj['mandatory']?'*':null}}</span>
+  </label>
+  <input
+    [name]="reqObj['formControl']"
+    class="form-control {{reqObj['isEditable']?'':'disabled'}}"
+    [readonly]="reqObj['isEditable']?false:true"
+    [formControlName]="reqObj['formControl']?reqObj['formControl']:null"
+    rows="1"
+    tabindex="{{reqObj['isEditable']?0:-1}}"
+    placeholder="{{reqObj['placeholder']}}"
+    bsDatepicker
+    [bsConfig]="datePickerConfig"
+    [isDisabled]="!reqObj['isEditable']"
+    [minDate]="reqObj['minDate']"
+    [maxDate]="reqObj['maxDate']"
+    (bsValueChange)="onCallback($event)"
+  >
+</div>
