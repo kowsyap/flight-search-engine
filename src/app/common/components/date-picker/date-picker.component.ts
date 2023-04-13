@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
@@ -10,19 +10,20 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 export class DatePickerComponent implements OnInit {
   @Input() parentForm!: FormGroup;
   @Input() reqObj: any;
+  @Input() actionsTemplate!: TemplateRef<any>;
+
   @Output('callBack') callBack:EventEmitter<any> = new EventEmitter();
 
-  datePickerConfig: Partial<BsDatepickerConfig>;
+  datePickerConfig!: Partial<BsDatepickerConfig>;
 
   constructor() {
-    let obj: any = { containerClass: 'theme-dark-blue', isAnimated: true};
-    obj.dateInputFormat= this.reqObj['dateFormat']?this.reqObj['dateFormat']:'YYYY-MM-DD';
-
-    this.datePickerConfig = Object.assign({}, obj);
   }
 
   ngOnInit() {
-    
+    let obj: any = { containerClass: 'theme-dark-blue', isAnimated: true};
+    obj.dateInputFormat= this.reqObj?.['dateFormat']?this.reqObj['dateFormat']:'YYYY-MM-DD';
+    console.log(this.reqObj)
+    this.datePickerConfig = Object.assign({}, obj);
   }
 
   onCallback(e:any){

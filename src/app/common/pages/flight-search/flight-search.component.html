@@ -1,3 +1,52 @@
-<p>
-  flight-search works!
-</p>
+<div class="flight-search">
+  <div class="card content">
+    <div class="card-title h4 mt-2">Flights from {{searchForm.get('origin')?.value}}</div>
+    <div class="card-body" style="text-align: center;">
+      <form [formGroup]="searchForm">
+        <div class="row g-2">
+          <div class="col">
+            <div class="input-group">
+              <div class="input-group-text">
+                <fa-icon [icon]="origin"></fa-icon>
+              </div>
+              <ng-select [items]="citiesList" bindLabel="name" bindValue="code" formControlName="origin" placeholder="Origin *" class="form-control addon">
+                <ng-template ng-option-tmp let-item="item">
+                  {{item.name}} ({{item.code}})
+                </ng-template>
+              </ng-select>
+          <div *ngIf="f['origin'].invalid && f['origin'].touched" class="invalid-feedback">
+                <div *ngIf="f['origin'].errors?.['required']">
+                  Please enter origin
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group">
+              <div class="input-group-text">
+                <fa-icon [icon]="destination"></fa-icon>
+              </div>
+              <ng-select [items]="citiesList" bindLabel="name" bindValue="code" formControlName="destination" placeholder="Destination *" class="form-control addon">
+                <ng-template ng-option-tmp let-item="item">
+                  {{item.name}} ({{item.code}})
+                </ng-template>
+              </ng-select>              <div *ngIf="f['destination'].invalid && f['destination'].touched" class="invalid-feedback">
+                <div *ngIf="f['destination'].errors?.['required']">
+                  Please enter destination
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 row g-2 align-items-center">
+            <div class="col-4 border-top"></div>
+            <div class="col-4 d-flex justify-content-center align-items-center">
+              <button class="pill" type="submit" (click)="submit()" [disabled]="searchForm.invalid">Show Flights
+              <fa-icon [icon]="rightarrow"></fa-icon></button>
+            </div>
+            <div class="col-4 border-top"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

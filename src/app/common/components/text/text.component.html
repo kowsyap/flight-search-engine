@@ -1,16 +1,24 @@
-<div [formGroup]="parentForm">
-  <label [for]="reqObj['formControl']" class="form-label">{{reqObj['label']}}
+<div class="form-floating" [formGroup]="parentForm">
+  <label [for]="reqObj['formControl']" class="form-label" *ngIf="reqObj['label']">{{reqObj['label']}}
     &nbsp;<span class="text-danger">{{reqObj['mandatory']?'*':null}}</span>
   </label>
-  <input
-    [name]="reqObj['formControl']"
-    [type]="reqObj['type']==='number'?'number':'text'"
-    class="form-control {{reqObj['isEditable']?'':'disabled'}}"
-    [readonly]="reqObj['isEditable']?false:true"
-    [formControlName]="reqObj['formControl']?reqObj['formControl']:null"
-    rows="1"
-    tabindex="{{reqObj['isEditable']?0:-1}}"
-    placeholder="{{reqObj['placeholder']}}"
-    (keyup)="onCallback($event)"
-  >
+  <div class="input-group">
+    <div class="input-group-text" *ngIf="actionsTemplate">
+      <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
+    </div>
+    <input
+      [name]="reqObj['formControl']"
+      [type]="reqObj['type']==='number'?'number':'text'"
+      class="{{reqObj['className']?reqObj['className']:''}} {{actionsTemplate?'addon':''}} form-control {{reqObj['isEditable']?'':'disabled'}}"
+      [ngStyle]="{'border-left': actionsTemplate?'unset':''}"
+      [readonly]="reqObj['isEditable']?false:true"
+      min="{{reqObj['min']}}"
+      max="{{reqObj['max']}}"
+      [formControlName]="reqObj['formControl']?reqObj['formControl']:null"
+      rows="1"
+      tabindex="{{reqObj['isEditable']?0:-1}}"
+      placeholder="{{reqObj['placeholder']}}"
+      (keyup)="onCallback($event)"
+    >
+  </div>
 </div>

@@ -8,12 +8,14 @@ import { BsModalRef,ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     NgScrollbarModule,
+    FontAwesomeModule,
     BsDatepickerModule,
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
@@ -34,6 +36,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     TooltipModule,
     ModalModule,
     NgScrollbarModule,
+    FontAwesomeModule,
     NgMultiSelectDropDownModule,
     NgSelectModule,
     BsDatepickerModule,

@@ -5,6 +5,8 @@
 
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "node_modules/ng-multiselect-dropdown/themes/ng-multiselect-dropdown.theme.scss";
 
 .form-floating:not(.form-control:disabled)::before {
     background-color: transparent;
@@ -22,7 +24,7 @@ body{
 .header{
     @extend .position-sticky;
     @extend .top-50;
-    @extend .bg-body;
+    //@extend .bg-body;
     @extend .border-bottom;
   //  @extend .border-mode;
     @extend .shadow-sm;
@@ -58,6 +60,10 @@ body{
 
 .interface{
     position: absolute;
+    background-image: url(./assets/images/plane-banner.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     left: 0;
     top: 0;
     width: 100%;
@@ -76,4 +82,117 @@ body{
         flex: 0 0 auto;
         width: auto;
     }
+}
+
+input {
+    text-align: center;  
+    border: 1px solid #6C757D;
+  } 
+
+  input.h-50{
+    height: 50px!important;
+  }
+  
+  input[type="number"] {
+    -webkit-appearance: textfield !important;
+    -moz-appearance: textfield !important;
+    appearance: textfield !important;
+    }
+  
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+  
+  .wrapper {
+    border: 2px #dcd3d3 solid;
+    width: 100%;
+    height: 50px;
+    //padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    justify-content: center;
+    border-radius: 15px;
+  }
+  
+  .plusminus {
+    height: 100%;
+    width: 30%;
+    background: white;
+    margin-inline: 10px;
+    border: none;
+    font-size: 40px;
+    color: #5f5fce;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .plusminus.disable{
+    color: #6d7277;
+    //pointer-events: none;
+    cursor: not-allowed;
+  }
+  
+  .form-control.addon:focus{
+    border: 1px solid #ced4da;
+    border-left: unset;
+    border-radius: 0.375rem;
+    box-shadow: unset;
+  }
+
+  .form-control.addon{
+    border-left: unset;
+    border-radius: 0.375rem;
+  }
+
+  .input-group-text{
+    border-right: unset;
+    background-color: #fff!important;
+  }
+
+  .ng-select .ng-select-container{
+    border: unset;
+  }
+
+  .pill{
+    height: 30px;
+    width: 100%;
+    background-color: #007bff;
+    border-radius: 60px;
+    color: white;
+    border: unset;
+  }
+
+  .pill:hover{
+    background-color: #0062cc!important;
+  }
+  .pill:disabled{
+    color: #fff;
+    background-color: #59a4f4!important;
+    border-color: #007bff;
+    cursor: not-allowed;
+  }
+  
+.card{
+  background-color: rgba(255, 255, 255, 0.3)!important;
+backdrop-filter: blur(10px)!important;
+}
+
+.multiselect-dropdown .dropdown-btn{
+  background-color: #fff;
+  border: unset !important;
+}
+
+.flight-card{
+  //width: 100%;
+  height:60px;
+  background-color: #fff; 
+}
+
+.ico{
+  font-size: 60px;
+  color: rgba(0, 0, 0, 0.8)!important;
 }

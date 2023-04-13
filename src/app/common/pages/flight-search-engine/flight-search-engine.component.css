@@ -1,0 +1,11 @@
+.float{
+    position: fixed;
+    z-index: 999;
+    right:45%;
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

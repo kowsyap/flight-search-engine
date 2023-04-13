@@ -1,3 +1,88 @@
-<p>
-  flight-search-engine works!
-</p>
+<div class="container-fluid" style="margin-top: 150px;">
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-title h4 text-center mt-2">Flight Search</div>
+        <div class="card-body">
+          <form [formGroup]="searchForm">
+            <div class="row g-2">
+              <div class="col-6 d-flex">
+                <div class="rounded-circle bg-light float" (click)="exchange()">
+                  <fa-icon [icon]="rightleftarrow"></fa-icon>
+                </div>
+                <div class="input-group">
+                  <div class="input-group-text">
+                    <fa-icon [icon]="origin"></fa-icon>
+                  </div>
+                  <ng-select [items]="citiesList" bindLabel="name" bindValue="code" formControlName="origin" placeholder="Origin *" class="form-control addon">
+                    <ng-template ng-option-tmp let-item="item">
+                      {{item.name}} ({{item.code}})
+                    </ng-template>
+                  </ng-select>
+                  <div *ngIf="f['origin'].invalid && f['origin'].touched" class="invalid-feedback">
+                    <div *ngIf="f['origin'].errors?.['required']">
+                      Please enter origin
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="input-group">
+                  <div class="input-group-text">
+                    <fa-icon [icon]="destination"></fa-icon>
+                  </div>
+                  <ng-select [items]="citiesList" bindLabel="name" bindValue="code" formControlName="destination" placeholder="Destination *" class="form-control addon">
+                    <ng-template ng-option-tmp let-item="item">
+                      {{item.name}} ({{item.code}})
+                    </ng-template>
+                  </ng-select>
+                  <div *ngIf="f['destination'].invalid && f['destination'].touched" class="invalid-feedback">
+                    <div *ngIf="f['destination'].errors?.['required']">
+                      Please enter destination
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <ng-template #action>
+                  <fa-icon [icon]="calender"></fa-icon>
+                </ng-template>
+                <app-date-picker
+                  [parentForm]="searchForm"
+                  [actionsTemplate]="action"
+                  [reqObj]="{formControl:'start_date',placeholder:'Select Date',mandatory:true,isEditable:true,dateFormat:'ddd, MMM DD',className:'h-50',minDate:today,maxDate:monthAfter}"
+                ></app-date-picker>
+              </div>
+              <div class="col-6">
+                <ng-multiselect-dropdown
+                  [placeholder]="'Select Airlines'"
+                  class="form-control"
+                  [settings]="dropdownSettings"
+                  [data]="airlinesList"
+                  formControlName="airlines"
+                  (onSelect)="onItemSelect($event)"
+                  (onSelectAll)="onSelectAll($event)"
+                >
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="col-5 h6 d-flex align-items-center justify-content-end">
+                Passengers Count
+              </div>
+              <div class="col-7">
+                <app-plus-minus [parentForm]="searchForm" [reqObj]="{formControl:'passengers',isEditable:true,min:1,max:5}" (callBack)="getPassengerFn($event)"></app-plus-minus>
+              </div>
+              <div class="col-12 text-center mt-4">
+                <button class="btn btn-primary" type="submit" (click)="submit()">
+                  Search
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <app-flights [flights]="filteredList"></app-flights>
+    </div>
+  </div>
+</div>
