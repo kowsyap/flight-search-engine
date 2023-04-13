@@ -6,7 +6,7 @@
         <div class="card-body">
           <form [formGroup]="searchForm">
             <div class="row g-2">
-              <div class="col-6 d-flex">
+              <div class="col-6">
                 <div class="rounded-circle bg-light float" (click)="exchange()">
                   <fa-icon [icon]="rightleftarrow"></fa-icon>
                 </div>
@@ -19,10 +19,10 @@
                       {{item.name}} ({{item.code}})
                     </ng-template>
                   </ng-select>
-                  <div *ngIf="f['origin'].invalid && f['origin'].touched" class="invalid-feedback">
-                    <div *ngIf="f['origin'].errors?.['required']">
-                      Please enter origin
-                    </div>
+                </div>
+                <div *ngIf="f['origin'].invalid && (f['origin']?.dirty || f['origin']?.touched)" class="form-danger">
+                  <div *ngIf="f['origin'].errors">
+                    Please enter origin
                   </div>
                 </div>
               </div>
@@ -36,10 +36,10 @@
                       {{item.name}} ({{item.code}})
                     </ng-template>
                   </ng-select>
-                  <div *ngIf="f['destination'].invalid && f['destination'].touched" class="invalid-feedback">
-                    <div *ngIf="f['destination'].errors?.['required']">
-                      Please enter destination
-                    </div>
+                </div>
+                <div *ngIf="f['destination'].invalid && (f['destination']?.dirty || f['destination']?.touched)" class="form-danger">
+                  <div *ngIf="f['destination'].errors">
+                    Please enter destination
                   </div>
                 </div>
               </div>
@@ -52,6 +52,11 @@
                   [actionsTemplate]="action"
                   [reqObj]="{formControl:'start_date',placeholder:'Select Date',mandatory:true,isEditable:true,dateFormat:'ddd, MMM DD',className:'h-50',minDate:today,maxDate:monthAfter}"
                 ></app-date-picker>
+                <div *ngIf="f['start_date'].invalid && (f['start_date']?.dirty || f['start_date']?.touched)" class="form-danger">
+                  <div *ngIf="f['start_date'].errors">
+                    Please select date
+                  </div>
+                </div>
               </div>
               <div class="col-6">
                 <ng-multiselect-dropdown
@@ -64,6 +69,11 @@
                   (onSelectAll)="onSelectAll($event)"
                 >
                 </ng-multiselect-dropdown>
+                <div *ngIf="f['airlines'].invalid && (f['airlines']?.dirty || f['airlines']?.touched)" class="form-danger">
+                  <div *ngIf="f['airlines'].errors">
+                    Please select airlines
+                  </div>
+                </div>
               </div>
               <div class="col-5 h6 d-flex align-items-center justify-content-end">
                 Passengers Count
@@ -72,7 +82,7 @@
                 <app-plus-minus [parentForm]="searchForm" [reqObj]="{formControl:'passengers',isEditable:true,min:1,max:5}" (callBack)="getPassengerFn($event)"></app-plus-minus>
               </div>
               <div class="col-12 text-center mt-4">
-                <button class="btn btn-primary" type="submit" (click)="submit()">
+                <button class="btn btn-primary" type="submit" (click)="submit()" [disabled]="searchForm.invalid">
                   Search
                 </button>
               </div>
@@ -82,7 +92,7 @@
       </div>
     </div>
     <div class="col-8">
-      <app-flights [flights]="filteredList"></app-flights>
+      <app-flights [flights]="filteredList" [isLoaded]="loaded"></app-flights>
     </div>
   </div>
 </div>

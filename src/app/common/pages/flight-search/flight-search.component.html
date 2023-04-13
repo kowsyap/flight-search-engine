@@ -14,10 +14,10 @@
                   {{item.name}} ({{item.code}})
                 </ng-template>
               </ng-select>
-          <div *ngIf="f['origin'].invalid && f['origin'].touched" class="invalid-feedback">
-                <div *ngIf="f['origin'].errors?.['required']">
-                  Please enter origin
-                </div>
+            </div>
+            <div *ngIf="f['origin'].invalid && (f['origin']?.dirty || f['origin']?.touched)" class="form-danger">
+              <div *ngIf="f['origin'].errors">
+                Please enter origin
               </div>
             </div>
           </div>
@@ -30,10 +30,11 @@
                 <ng-template ng-option-tmp let-item="item">
                   {{item.name}} ({{item.code}})
                 </ng-template>
-              </ng-select>              <div *ngIf="f['destination'].invalid && f['destination'].touched" class="invalid-feedback">
-                <div *ngIf="f['destination'].errors?.['required']">
-                  Please enter destination
-                </div>
+              </ng-select> 
+            </div>
+            <div *ngIf="f['destination'].invalid && (f['destination']?.dirty || f['destination']?.touched)" class="form-danger">
+              <div *ngIf="f['destination'].errors">
+                Please enter destination
               </div>
             </div>
           </div>

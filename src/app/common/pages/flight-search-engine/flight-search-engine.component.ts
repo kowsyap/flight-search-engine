@@ -4,6 +4,7 @@ import { faCircleNotch,faLocationDot,faArrowRightArrowLeft,faArrowRight,faCalend
 import * as moment from 'moment';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import config from 'src/app/shared/config';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-flight-search-engine',
@@ -25,8 +26,9 @@ export class FlightSearchEngineComponent implements OnInit {
   citiesList = config.citiesList;
   flightsList = config.flightList;
   filteredList:any=[];
+  loaded=true;
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder, private utils: UtilsService
   ) { }
 
   ngOnInit() {
@@ -87,6 +89,7 @@ export class FlightSearchEngineComponent implements OnInit {
     }
   }
   filterFlights(){
+    this.loaded=false;
     let passengers=parseInt(this.searchForm.get('passengers')?.value);
     let to=this.searchForm.get('origin')?.value;
     let from=this.searchForm.get('destination')?.value;
@@ -100,6 +103,6 @@ export class FlightSearchEngineComponent implements OnInit {
       });
     let mappedData = tofroFiltered.map((obj:any)=>{return {...obj,'cost':passengers*obj.cost}});
     this.filteredList = mappedData;
-    console.log(this.filteredList,travel_date,passengers,airlines)
+    setTimeout(()=> this.loaded=true,1000);;
   }
 }

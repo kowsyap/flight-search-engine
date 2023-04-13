@@ -25,7 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
       {
         preventDuplicates: true,
         tapToDismiss: true,
-        positionClass: 'toast-bottom-right'
+        positionClass: 'toast-top-right'
       }
     )
   ],

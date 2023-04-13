@@ -1,12 +1,17 @@
 <div class="card h-100" style="min-height: 500px;">
   <div class="h5 card-title mt-2 ms-2">List of Flights</div>
   <div class="card-body">
-      <ng-scrollbar visibility="hover" class="flex-grow-1 min-h-0 border rounded overflow-hidden" *ngIf="flights.length"> 
+      <ng-scrollbar visibility="hover" class="flex-grow-1 min-h-0 border rounded overflow-hidden" *ngIf="flights.length && isLoaded"> 
           <div *ngFor="let flight of flights;let i=index;">
             <app-flight-card [data]="flight"></app-flight-card>
           </div>
       </ng-scrollbar>
-      <div *ngIf="!flights.length" class="d-flex flex-column h-100 justify-content-center align-items-center ico">
+      <div *ngIf="!isLoaded" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div *ngIf="!flights.length && isLoaded" class="d-flex flex-column h-100 justify-content-center align-items-center ico">
         <fa-icon [icon]="plane"></fa-icon>
         <div class="h3">Flights Not Found</div>
       </div>

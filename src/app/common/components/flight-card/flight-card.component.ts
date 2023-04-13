@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
+import config from 'src/app/shared/config';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-flight-card',
@@ -9,7 +11,9 @@ import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
 export class FlightCardComponent implements OnInit {
   @Input() data: any;
   faIndianRupee=faIndianRupeeSign;
-  constructor() { }
+  airlineList=config.airlinesList;
+  
+  constructor(private utils:UtilsService) { }
 
   ngOnInit() {
   }
@@ -50,4 +54,10 @@ export class FlightCardComponent implements OnInit {
   addTimes(t0:string, t1:string) {
     return this.timeFromMins(this.timeToMins(t0) + this.timeToMins(t1));
   }
+
+  
+  getValFromKey(arr:any,key:any,val:any,valKey?:any){
+    this.utils.getValFromKey(arr,key,val,valKey);
+  }
+
 }

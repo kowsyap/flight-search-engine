@@ -1,17 +1,18 @@
 <div class="flight-card border row align-items-center">
   <div class="col-md-2 text-center">
-    <img width="60" height="60" src="../../../../assets/images/plane-banner.jpg" class="img-thumbnail object-fit-cover">
+    <img width="60" height="60" [src]="'../../../../assets/images/'+data?.flightOperatedBy+'.png'" class="img-thumbnail object-fit-cover">
   </div>
   <div class="col-md-3 text-center">
     <div class="small fw-semibold">{{formatAMPM(data?.departureTime)}}-{{formatAMPM(addTimes(data?.departureTime,data?.duration))}}</div>
-    <div class="small text-muted">{{data?.flightOperatedBy}}</div>
+    <div class="small text-muted">{{getValFromKey(airlineList,'code',data?.flightOperatedBy,'name')}}</div>
   </div>
   <div class="col-md-3 text-center">
     <div class="small fw-semibold">{{convHr(data?.duration)}}</div>
     <div class="small text-muted">{{data?.originStnCity}}-{{data?.destinationStnCity}}</div>
   </div>
   <div class="col-md-2 text-center">
-    <div class="small fw-semibold">Nonstop</div>
+    <div class="small fw-semibold">{{data?.flightClass}}</div>
+    <div class="small text-muted">Class</div>
   </div>
   <div class="col-md-2 text-center">
     <fa-icon [icon]="faIndianRupee"></fa-icon>
