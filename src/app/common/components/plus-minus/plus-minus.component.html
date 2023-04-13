@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <div class="plusminus {{checkVal('minus')?'':'disable'}}" (click)="handleMinus()"><fa-icon [icon]="faMinus"></fa-icon></div>
+<!--   <ng-template #action>
+    <fa-icon [icon]="fff"></fa-icon>
+  </ng-template> -->
+  <app-text 
+    [parentForm]="parentForm"
+    [reqObj]="{
+      type:'number',formControl: reqObj['formControl'],isEditable: reqObj['isEditable'],min: reqObj['min'],max: reqObj['max'],className:'num'
+    }" (callBack)="getValue($event)"
+    ></app-text>
+  <div class="plusminus {{checkVal('plus')?'':'disable'}}" (click)="handlePlus()"><fa-icon [icon]="faPlus"></fa-icon></div>
+</div>
